@@ -26,6 +26,7 @@ app.get('/api/blogs', (request, response) => {
 });
 
 app.post('/api/blogs', (request, response) => {
+  console.log('test');
   const blog = new Blog(request.body);
 
   blog.save().then((result) => {
