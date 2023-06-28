@@ -1,6 +1,6 @@
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkVsYWQiLCJpZCI6IjY0OTljN2Y2ODBkYzZmNjdiM2UxYjdkNSIsImlhdCI6MTY4NzgwOTU0M30.oc_O0T-nkL-7HdWkzDMSuf3MOQ22D42VHkxlz_tCve0
 {
     "title": "First",
     "author": "Elad",
