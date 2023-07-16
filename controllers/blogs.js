@@ -4,6 +4,7 @@ const Blog = require('../models/blog');
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 const middleware = require('../utils/middleware');
+
 blogsRouter.get('/', async (request, response) => {
   const blogs = await Blog.find({}).populate('user', {
     username: 1,
@@ -37,6 +38,7 @@ blogsRouter.post(
       await user.save();
       response.json(savedBlog);
     } catch (error) {
+      console.log(error);
       next(error);
     }
   }
@@ -64,9 +66,27 @@ blogsRouter.put('/:id', async (request, response, next) => {
   const id = request.params.id;
   const body = request.body;
   try {
+    console.log(body.likes);
     const updatedBlog = await Blog.findByIdAndUpdate(
       id,
       { likes: body.likes },
+      { new: true }
+    );
+    return response.json(updatedBlog);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+});
+
+blogsRouter.post('/:id/comments', async (request, response, next) => {
+  const id = request.params.id;
+  const body = request.body;
+  try {
+    console.log(body.comment, 'my request!!');
+    const updatedBlog = await Blog.findByIdAndUpdate(
+      id,
+      { $push: { comments: body } },
       { new: true }
     );
     return response.json(updatedBlog);
